@@ -18,8 +18,15 @@ def mnist_formatter(img):
 
     for i in range(img_n.size[0]):
         for j in range(img_n.size[1]):
-            b = pixel_o[math.floor(i*step_w+start_w), math.floor(j*step_h+start_h)]
-            pixel_n[i,j] = (b)
+            
+            bp = 0
+            for b in range(math.floor(step_w)):
+                for h in range(math.floor(step_h)):
+                    bp += pixel_o[math.floor(i*step_w+start_w+b), math.floor(j*step_h+start_h+h)]
+            bp = int(bp/(math.floor(step_w)*math.floor(step_h)))
+            
+            #bp = pixel_o[math.floor(i*step_w+start_w), math.floor(j*step_h+start_h)]
+            pixel_n[i,j] = bp
                 
     return img_n
             
